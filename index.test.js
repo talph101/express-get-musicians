@@ -12,11 +12,17 @@ const {seedMusician} = require("./seedData");
 
 describe('./musicians endpoint', () => {
     // Write your tests here
+    test('The response to an endpoint can be accessed using the supertest package', async () => {
+        const response = await request(app).get("/musicians");
+        expect(response.body).toEqual(expect.any(Array));
+    })
+
+
+    test("Testing musicians endpoint", async () => {
+        const response = await request(app).get("/musicians");
+        expect(response.statusCode).toBe(200);
+    });
+
     
-    
-
-
-
-
     
 })
