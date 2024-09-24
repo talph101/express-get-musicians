@@ -21,8 +21,15 @@ describe('./musicians endpoint', () => {
     test("Testing musicians endpoint", async () => {
         const response = await request(app).get("/musicians");
         expect(response.statusCode).toBe(200);
-    });
+    });    
+    
+})
 
-    
-    
+describe('Tests for Express Musicians Part 2', () => {
+    test("should respond ID parameter value 1", async () => {
+        const response = await request(app).get("/musicians/1");
+        expect(response.statusCode).toBe(200);
+        const responseData = response.body;
+        expect(responseData.id).toEqual(1);
+      });
 })
