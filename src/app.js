@@ -4,6 +4,8 @@ const { Musician } = require("../models/index")
 const { db } = require("../db/connection")
 
 const port = 8000;
+app.use(express.json());
+app.use(express.urlencoded({extended: true}));
 
 //TODO: Create a GET /musicians route to return all musicians 
 app.get('/musicians', async(req, res) => {
@@ -46,9 +48,16 @@ app.put("/musicians/:id", async (req, res, next) => {
     }
 })
 
-
-
-
+app.delete("/musicians/:id", async (req, res) => {
+    try{
+        const id = req.params.id;
+        const data = await Musician.findByPk(id);
+        await data.destroy();
+        res.json(data);
+    } catch (e) {
+        console.error(e);
+    }
+})
 
 
 
