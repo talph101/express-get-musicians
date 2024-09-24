@@ -25,6 +25,27 @@ app.get('/musicians/:id', async (req, res) => {
     }
 })
 
+app.post("/musicians", async (req,res,next) => {
+    try{
+        const newMusician= await Musician.create(req.body);
+        res.json(newMusician);
+    } catch(e){
+        console.error(e);
+        next(e);
+    }
+})
+
+app.put("/musicians/:id", async (req, res, next) => {
+    try {
+        let chosenMusician = await Musician.findByPk(req.params.id);
+        chosenMusician = await chosenMusician.update(req.body);
+        res.json(chosenMusician);
+    } catch (e) {
+        console.error(e);
+        next(e);
+    }
+})
+
 
 
 
